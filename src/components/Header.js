@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { CartContext } from "../contexts/CartContext";
 
 function Header() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const { shoppingCart } = useContext(CartContext);
 
   async function handleLogout() {
     setError("");
@@ -18,15 +21,16 @@ function Header() {
       setError("Failed to log out");
     }
   }
+
   return (
     <div>
       <header className="header_area">
         <div className="main_menu">
           <nav className="navbar navbar-expand-lg navbar-light">
             <div className="container">
-              <a className="navbar-brand logo_h">
+              <Link to="/" className="navbar-brand logo_h">
                 <h2>EasyBuy</h2>
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -40,27 +44,30 @@ function Header() {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
+
               <div
                 className="collapse navbar-collapse offset"
                 id="navbarSupportedContent"
               >
                 <ul className="nav navbar-nav menu_nav ml-auto mr-auto">
                   <li className="nav-item ">
-                    <a className="nav-link "> Our Shop</a>
+                    <Link to="/" className="nav-link ">
+                      {" "}
+                      Our Shop
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="nav-shop">
-                  {/* <li className="nav-item">
-                    <button>
-                      <i className="ti-search"></i>
-                    </button>
-                  </li> */}
                   <li className="nav-item">
-                    <button>
-                      <CgShoppingCart />
-                      <span className="nav-shop__circle">3</span>
-                    </button>
+                    <Link to="/cart">
+                      <button>
+                        <CgShoppingCart />
+                        <span className="nav-shop__circle">
+                          {shoppingCart.length}
+                        </span>
+                      </button>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <button

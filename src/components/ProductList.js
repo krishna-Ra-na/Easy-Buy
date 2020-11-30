@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Product from "./Product";
-import Header from "./Header";
-import data from "../data";
 import { useAuth } from "../contexts/AuthContext";
+import { ProductsContext } from "../contexts/ProductsContext";
 
-function Home() {
-  const [product, setProduct] = useState(data);
+function ProductList() {
+  const { products } = useContext(ProductsContext);
+  // console.log(products);
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
 
   return (
     <>
-      <Header />
       <div className="card text-center">
         {error && (
           <div className="alert alert-danger" role="alert">
@@ -29,8 +28,8 @@ function Home() {
             </h2>
           </div>
           <div className="row">
-            {product.map((item) => {
-              return <Product item={item} key={item.id} />;
+            {products.map((product) => {
+              return <Product product={product} key={product.id} />;
             })}
           </div>
         </div>
@@ -39,4 +38,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default ProductList;

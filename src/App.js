@@ -1,31 +1,32 @@
 import "./App.css";
-import Home from "./components/Home";
+import ProductList from "./components/ProductList";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import PasswordReset from "./components/PasswordReset";
+import Header from "./components/Header";
+// import PasswordReset from "./components/PasswordReset";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import ProductDetails from "./components/ProductDetails";
+import Cart from "./components/Cart";
 
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <div className="App">
-          <Switch>
-            <PrivateRoute exact path="/" component={Home} />
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
+      <div className="App">
+        <Header />
+        <Switch>
+          <PrivateRoute exact path="/" component={ProductList} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/Productdetails" component={ProductDetails} />
+          <Route path="/cart" component={Cart} />
+
+          {/* 
             <Route path="/passwordReset">
               <PasswordReset />
-            </Route>
-          </Switch>
-        </div>
-      </AuthProvider>
+            </Route> */}
+        </Switch>
+      </div>
     </Router>
   );
 }
