@@ -50,6 +50,7 @@
 }
 .cart_inner .table tbody tr td .product_count {
   margin-bottom: 0px;
+  min-width: 100px;
 }
 .cart_inner .table tbody tr td .product_count input {
   width: 100px;

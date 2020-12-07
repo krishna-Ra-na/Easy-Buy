@@ -4,16 +4,14 @@ import { CgShoppingCart } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CartContext } from "../contexts/CartContext";
+import { ProductsContext } from "../contexts/ProductsContext";
 
 function Product({ product }) {
   const { name, category, image, price, id } = product;
-
+  const { handleDetail, openModal } = useContext(ProductsContext);
   const { dispatch } = useContext(CartContext);
 
-  // const handleDetail = () => {
-  //   console.log("hello from detail");
-  // };
-
+  // console.log(product);
   return (
     <div className="col-md-6 col-lg-4 col-xl-3">
       <div className="card text-center card-product">
@@ -28,6 +26,7 @@ function Product({ product }) {
                     id,
                     product,
                   });
+                  openModal(id);
                 }}
               >
                 <CgShoppingCart />
@@ -37,8 +36,8 @@ function Product({ product }) {
         </div>
         <div className="card-body">
           <p>{category}</p>
-          <h4 className="card-product__title">
-            <a onClick={handleDetail}>{name}</a>
+          <h4 className="card-product__title" onClick={() => handleDetail(id)}>
+            <Link to="/Productdetails">{name}</Link>
           </h4>
           <p className="card-product__price">$ {price}</p>
         </div>

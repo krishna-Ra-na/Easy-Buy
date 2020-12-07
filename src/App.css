@@ -136,3 +136,25 @@ a {
     padding: 8px 25px !important;
   }
 }
+
+.modal-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog .modal-content {
+  text-align: center;
+}
+.modal-dialog .modal-content .modal-body h5 {
+  color: #333333;
+  padding: 15px;
+}
+.modal-footer {
+  justify-content: center;
+}

@@ -3,10 +3,11 @@ import "./Cart.css";
 import { CartContext } from "../contexts/CartContext";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 function Cart() {
   const { shoppingCart, totalPrice, dispatch } = useContext(CartContext);
-  console.log(shoppingCart);
+  // console.log(shoppingCart, totalPrice, dispatch);
   return (
     <section className="cart_area">
       <div className="container">
@@ -18,6 +19,7 @@ function Cart() {
                   <th scope="col">Product</th>
                   <th scope="col">Price</th>
                   <th scope="col">Quantity</th>
+                  <th scope="col">Remove</th>
                   <th scope="col">Total</th>
                 </tr>
               </thead>
@@ -51,16 +53,28 @@ function Cart() {
                             <MdKeyboardArrowUp />
                             <i className="lnr lnr-chevron-up"></i>
                           </button>
-                          <button
-                            className="reduced items-count"
-                            type="button"
-                            onClick={() =>
-                              dispatch({ type: "DEC", id: cart.id, cart })
-                            }
-                          >
-                            <MdKeyboardArrowDown />
-                          </button>
+                          {cart.qty > 1 && (
+                            <button
+                              className="reduced items-count"
+                              type="button"
+                              onClick={() =>
+                                dispatch({ type: "DEC", id: cart.id, cart })
+                              }
+                            >
+                              <MdKeyboardArrowDown />
+                            </button>
+                          )}
                         </div>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            dispatch({ type: "REMOVE", id: cart.id, cart })
+                          }
+                        >
+                          <MdDelete />
+                        </button>
                       </td>
                       <td>
                         <h5>${cart.price * cart.qty}</h5>

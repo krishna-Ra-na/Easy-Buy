@@ -10,15 +10,15 @@ import reportWebVitals from "./reportWebVitals";
 import ProductsProvider from "./contexts/ProductsContext";
 import CartProvider from "./contexts/CartContext";
 ReactDOM.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <ProductsProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </ProductsProvider>
-    </AuthProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <AuthProvider>
+    <ProductsProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </ProductsProvider>
+  </AuthProvider>,
+  // </React.StrictMode>
   document.getElementById("root")
 );
 

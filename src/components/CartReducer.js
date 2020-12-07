@@ -22,18 +22,41 @@ export const CartReducer = (state, action) => {
         qty: updatedQty,
       };
 
-    // case "INC":
-    //   product = action.product;
-    //   product.qty = product.qty + 1;
-    //   updatedPrice = totalPrice + product.price;
-    //   updatedQty = qty + 1;
-    //   index = shoppingCart.findIndex((cart) => cart.id === action.id);
-    //   shoppingCart[index] = product;
-    //   return {
-    //     shoppingCart: [...shoppingCart],
-    //     totalPrice: updatedPrice,
-    //     qty: updatedQty,
-    //   };
+    case "INC":
+      product = action.cart;
+      index = shoppingCart.findIndex((cart) => cart.id === action.id);
+      product = shoppingCart[index];
+      product.qty = product.qty + 1;
+      updatedPrice = totalPrice + product.price;
+      updatedQty = qty + 1;
+      return {
+        shoppingCart: [...shoppingCart],
+        totalPrice: updatedPrice,
+        qty: updatedQty,
+      };
+    case "DEC":
+      product = action.cart;
+      index = shoppingCart.findIndex((cart) => cart.id === action.id);
+      product = shoppingCart[index];
+      product.qty = product.qty - 1;
+      updatedPrice = totalPrice - product.price;
+      updatedQty = qty - 1;
+      return {
+        shoppingCart: [...shoppingCart],
+        totalPrice: updatedPrice,
+        qty: updatedQty,
+      };
+
+    case "REMOVE":
+      const filteredCart = shoppingCart.filter((cart) => cart.id !== action.id);
+      product = action.cart;
+      updatedPrice = totalPrice - product.price * product.qty;
+      updatedQty = qty - product.qty;
+      return {
+        shoppingCart: [...filteredCart],
+        totalPrice: updatedPrice,
+        qty: updatedQty,
+      };
 
     default:
       return state;
